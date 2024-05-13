@@ -3,9 +3,9 @@ import InputBox from './InputBox'
 import { Link, useNavigate } from 'react-router-dom'
 import {signupType} from "@kunalwalmiki/common";
 import axios from 'axios';
-import { BACKEND_URL } from '../config';
 import { useToast } from "@chakra-ui/react"
 import { Button} from '@chakra-ui/react'
+import { BACKEND_URL } from '../config';
 
 
 const Auth = ({type} : {type : "signup" | "signin"}) => {
@@ -27,7 +27,6 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
     async function sendRequest() {
 
             setLoading(true);
-            
             if(type == 'signin') {
 
                 if(!formData.email || !formData.password) {
@@ -43,7 +42,7 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
                     return;
                 }
 
-                const response = await axios.post(`${BACKEND_URL}/api/v1/auth${type ? "/signin" : "/signup"}`, formData);
+                const response = await axios.post(`${BACKEND_URL}/api/v1/auth/signin`, formData);
             
                 console.log(response);
 
@@ -73,7 +72,7 @@ const Auth = ({type} : {type : "signup" | "signin"}) => {
                     return;
                 }
 
-                const response = await axios.post(`${BACKEND_URL}/api/v1/auth${type === 'signup' ? "/signup" : "/signin"}`, formData);
+                const response = await axios.post(`${BACKEND_URL}/api/v1/auth/signup`, formData);
             
                 console.log(response);
 

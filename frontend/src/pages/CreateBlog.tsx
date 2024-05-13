@@ -5,7 +5,7 @@ import { Button, Textarea, useToast } from '@chakra-ui/react'
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
-
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 
 const CreateBlog = () => {
@@ -65,8 +65,16 @@ const CreateBlog = () => {
   return (
     <div className='overflow-x-hidden'>
     <Appbar/>
-    <div className='w-10/12 min-h-[500px] flex-col mx-auto mt-20 '>
-     <div className='flex flex-col gap-y-5 items-center justify-center'>
+    <div className='w-10/12 min-h-[500px] flex-col mx-auto mt-5'>
+
+      <button
+      className='flex items-center justify-center gap-x-1 hover:scale-95 transition-all duration-300'
+      onClick={() => navigate(-1)}
+      >
+               <IoIosArrowRoundBack/>
+               Back
+      </button>
+     <div className='flex flex-col gap-y-5 items-center justify-center mt-20'>
         <p
         className='font-extrabold text-black text-2xl'
         >Create New Blog</p>

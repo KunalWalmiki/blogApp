@@ -1,6 +1,7 @@
 import BlogCard from './BlogCard'
 import useBlogs from '../hooks/fetchBlogs'
 import BlogSKeleton from './BlogSKeleton'
+import { useNavigate } from 'react-router-dom'
 
 export interface blogInputs {
     author : {
@@ -15,6 +16,7 @@ export interface blogInputs {
 const Blogs = () => {
 
     const {blogs, loading} = useBlogs();
+    const navigate = useNavigate();
 
     if(loading) {
 
@@ -29,8 +31,8 @@ const Blogs = () => {
   return (
     <div className='flex flex-col gap-y-4 mb-5'>
     {
-        blogs && blogs?.map((blog : blogInputs, index : number) => {
-
+        blogs && blogs.length > 0 ? (
+            blogs.map((blog : blogInputs, index : number) => {
             return <BlogCard key={index}
             name={blog?.author?.name} 
             title={blog?.title} 
@@ -38,7 +40,22 @@ const Blogs = () => {
             publishedDate={blog?.publishedDate.substring(0,10)}
             id={blog?.id}
             />
-        })
+        })) 
+        : (
+              <div className='mt-20 flex flex-col items-center justify-center '>
+                   <p
+                   className='text-xl md:text-2xl font-semibold'
+                   >No Blogs Yet</p>
+                   <p
+                   className='text-md font-medium text-slate-500 mt-3'
+                   >
+                    Be the First One to Create Blog</p>
+                   <button
+                   className='px-4 py-1 bg-yellow-400 text-black font-medium rounded-md mt-5 hover:scale-95 hover:bg-yellow-500 transition-all duration-300'
+                   onClick={() => navigate("/createBlog")}
+                   >Create</button>
+              </div>
+          ) 
     }
     </div>
   )
